@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * Run the whole application but we don't use Mongo. We mock the Repository.
- * The controller is  running but
+ * We are mocking the connection to Mongo con the label @Mock
  *
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
@@ -39,7 +39,7 @@ public class MockitoWebTestApplication {
     CustomerRepository customerRepository; // Tendremos que especificar valores a retornar.
 
     @InjectMocks
-    Controlador1 controlador1;
+    Controlador1 controlador1; // Es como hacer un autowired. Llamaremos a nuestra clase de verdad.
 
     /**
      * Inicializo las condiciones para mockito

@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * The web application is not started. We mock everything.
  */
-@ExtendWith(MockitoExtension.class) // Si no se pone esta etiqueta hay que poner la funcion setUp que esta comentada.
+@ExtendWith(MockitoExtension.class) // Si no se pone esta etiqueta hay que poner la funcion setUp que esta comentada en este ejemplo.
 public class MockitoTestApplication {
 
     @Mock
@@ -28,6 +28,11 @@ public class MockitoTestApplication {
     @InjectMocks
     Controlador1 controlador1;
 
+//    @BeforeEach
+//    public void setUp()
+//    {
+//        MockitoAnnotations.openMocks(this);
+//    }
 
     /**
      * Inicializo las condiciones para mockito
@@ -47,6 +52,6 @@ public class MockitoTestApplication {
     void mockController()
     {
         List<Customer>  customers=controlador1.getAll();
-        Assertions.assertEquals(customers.size(),0);
+        Assertions.assertEquals(0,customers.size());
     }
 }

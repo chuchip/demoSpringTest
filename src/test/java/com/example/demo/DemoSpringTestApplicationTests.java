@@ -33,7 +33,6 @@ import lombok.extern.slf4j.Slf4j;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // I'm using this because I want the function starting to not be  static
 @Slf4j
 class DemoSpringTestApplicationTests {
-
 	@LocalServerPort
 	int puerto; // Puerto donde correra nuestra aplicación.
 	
@@ -43,14 +42,17 @@ class DemoSpringTestApplicationTests {
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	final  String FIRSTNAME="Test First Name";
+	final  static public String FIRSTNAME="Test First Name";
 
+	/**
+	 * Loading Initial data for MongoDB database.
+	 */
 	@BeforeAll
 	public  void starting()
 	{
 		Customer customer=new Customer();
 		customer.setId("1");
-		customer.setFirstName("Test First Name");
+		customer.setFirstName(FIRSTNAME);
 		customer.setLastName("Test Last Name");
 		customerRepository.save(customer);
 	}
@@ -58,20 +60,17 @@ class DemoSpringTestApplicationTests {
 	@Test
 	@DisplayName("Running app wihtout mockito")
 	void contextLoads() throws URISyntaxException {
-
-
-		RequestEntity<Void> request= RequestEntity.get(new URI("http://localhost:"+puerto))
+	RequestEntity<Void> request= RequestEntity.get(new URI("http://localhost:"+puerto)) // Creamos la URL de conexion.
 			     .accept(MediaType.APPLICATION_JSON).build();
 
 		ParameterizedTypeReference<List<Customer>> myList =
-			     new ParameterizedTypeReference<List<Customer>>() {}; // Use this to can return a List
-		ResponseEntity<List<Customer>> responseEntinty= restTemplate.exchange(request, myList);
+			     new ParameterizedTypeReference<List<Customer>>() {}; // Use this so it can return a List
+		ResponseEntity<List<Customer>> responseEntity= restTemplate.exchange(request, myList);
 
-		Assertions.assertEquals(responseEntinty.getStatusCodeValue(),200);
-		var respuesta=responseEntinty.getBody();
+		Assertions.assertEquals(responseEntity.getStatusCodeValue(),200);
+		var respuesta=responseEntity.getBody();
 		Assertions.assertEquals(respuesta.size(),1);
 		Assertions.assertEquals(respuesta.get(0).getFirstName(),FIRSTNAME);
-
 	}
 
 }
