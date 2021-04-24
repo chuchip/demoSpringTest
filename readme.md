@@ -2,13 +2,15 @@
 
 La URL de conexión a la base de datos debe ser puesta por cada usuario. 
 
-En un principio esta URL serviria para conectarse a una base de datos gratuita en Atlas
+En un principio la  URL configuada en application.properties serviría para conectarse a una base de datos gratuita en Atlas
 
 @See https://cloud.mongodb.com
 
 Si solo se desean probar los tests no es necesario tener una base de datos de mongo en el sistema ya que la applicación lanza una embebida.
 
 Este programa realiza un test completo en la clase "DemoSpringTestApplicationTests" y otro usando Mockito en la clase  MockitoTestApplication
+
+En el código explico las diferentes anotaciones.
 
 Los controladores existentes son:
 

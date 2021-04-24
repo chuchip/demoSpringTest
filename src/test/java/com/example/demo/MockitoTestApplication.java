@@ -10,15 +10,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.event.annotation.BeforeTestClass;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class) // Si no se pone esta etiqueta hay que poner la funcion setUp que esta comentada.
 public class MockitoTestApplication {
 
     @Mock
-    CustomerRepository customerRepository;
+    CustomerRepository customerRepository; // Tendremos que especificar
 
     @InjectMocks
     Controlador1 controlador1;
@@ -28,11 +29,24 @@ public class MockitoTestApplication {
 //    {
 //        MockitoAnnotations.openMocks(this);
 //    }
+
+    /**
+     * Inicializo las condiciones para mockito
+     */
+    @BeforeTestClass
+    public void putWhen()
+    {
+        Mockito.when(customerRepository.findAll()).thenReturn(new ArrayList<Customer>());
+    }
+
+    /**
+     * Realizo un test simple
+     * Tener en cuenta que realmente no se esta utilizando la base de datos ni se esta inicializando la aplicacion
+     */
     @Test
     @DisplayName("Controller using Mockito")
     void mockController()
     {
-        Mockito.when(customerRepository.findAll()).thenReturn(new ArrayList<Customer>());
         List<Customer>  customers=controlador1.getAll();
         Assertions.assertEquals(customers.size(),0);
     }
