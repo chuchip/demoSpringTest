@@ -56,17 +56,17 @@ class DemoSpringTestApplicationTests {
 	}
 
 	@Test
-	@DisplayName("Primer test")
+	@DisplayName("Running app wihtout mockito")
 	void contextLoads() throws URISyntaxException {
 
-		log.info("Ejecutando primer test");
+
 		RequestEntity<Void> request= RequestEntity.get(new URI("http://localhost:"+puerto))
 			     .accept(MediaType.APPLICATION_JSON).build();
-			     
+
 		ParameterizedTypeReference<List<Customer>> myList =
 			     new ParameterizedTypeReference<List<Customer>>() {}; // Use this to can return a List
 		ResponseEntity<List<Customer>> responseEntinty= restTemplate.exchange(request, myList);
-						
+
 		Assertions.assertEquals(responseEntinty.getStatusCodeValue(),200);
 		var respuesta=responseEntinty.getBody();
 		Assertions.assertEquals(respuesta.size(),1);

@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Controlador1 {
 
+	public final static String HELLOWORLD="Hello World!";
+
 	@Autowired
 	CustomerRepository customerRepository;
 	
@@ -30,6 +32,15 @@ public class Controlador1 {
 		log.info("--------------");
 		
 		return customerRepository.findAll();
+	}
+	@GetMapping("helloWorld")
+	public String helloWorld()
+	{
+		log.info("--------------");
+		log.info("I'm in helloWorld");
+		log.info("--------------");
+
+		return HELLOWORLD;
 	}
 	@PostMapping("/add")
 	public Customer add(@RequestBody Customer cliente)
