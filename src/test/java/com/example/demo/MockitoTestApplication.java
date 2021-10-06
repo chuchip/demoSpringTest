@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.collection.Customer;
+import com.example.demo.collection.Operaciones;
 import com.example.demo.controller.Controlador1;
 import com.example.demo.repository.CustomerRepository;
 import org.junit.jupiter.api.*;
@@ -24,6 +25,9 @@ public class MockitoTestApplication {
 
     @Mock
     CustomerRepository customerRepository; // Tendremos que especificar
+
+    @Mock
+    Operaciones operaciones;
 
     @InjectMocks
     Controlador1 controlador1;

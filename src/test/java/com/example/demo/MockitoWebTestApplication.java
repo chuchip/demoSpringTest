@@ -1,11 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.collection.Customer;
+import com.example.demo.collection.Operaciones;
 import com.example.demo.controller.Controlador1;
 import com.example.demo.repository.CustomerRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -33,6 +32,7 @@ import java.util.List;
  *
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MockitoWebTestApplication {
 
     @Mock
@@ -41,13 +41,16 @@ public class MockitoWebTestApplication {
     @InjectMocks
     Controlador1 controlador1; // Es como hacer un autowired. Llamaremos a nuestra clase de verdad.
 
+    @Mock
+    Operaciones operaciones;
     /**
      * Inicializo las condiciones para mockito
      */
-    @BeforeTestClass
+    @BeforeAll
     public void putWhen()
     {
         Mockito.when(customerRepository.findAll()).thenReturn(new ArrayList<Customer>());
+        Mockito.when(operaciones.sumar(3,3)).thenReturn(4);
     }
 
     /**

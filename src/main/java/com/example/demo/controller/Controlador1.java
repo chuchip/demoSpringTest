@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import com.example.demo.collection.Operaciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,14 +24,17 @@ public class Controlador1 {
 
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
+	@Autowired
+	Operaciones operaciones;
+
 	@GetMapping
 	public List<Customer> getAll()
 	{
 		log.info("--------------");
 		log.info("I'm in getAll");
 		log.info("--------------");
-		
+		log.info("Resultado: "+operaciones.sumar(3,3));
 		return customerRepository.findAll();
 	}
 	@GetMapping("helloWorld")

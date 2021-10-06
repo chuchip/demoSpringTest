@@ -71,6 +71,7 @@ class DemoSpringTestApplicationTests {
 		var respuesta=responseEntity.getBody();
 		Assertions.assertEquals(respuesta.size(),1);
 		Assertions.assertEquals(respuesta.get(0).getFirstName(),FIRSTNAME);
+
 	}
 
 }
